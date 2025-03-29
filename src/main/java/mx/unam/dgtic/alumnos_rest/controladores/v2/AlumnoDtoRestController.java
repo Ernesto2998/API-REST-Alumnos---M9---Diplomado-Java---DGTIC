@@ -1,5 +1,6 @@
 package mx.unam.dgtic.alumnos_rest.controladores.v2;
 
+import jakarta.validation.Valid;
 import mx.unam.dgtic.alumnos_rest.dtos.AlumnoDto;
 import mx.unam.dgtic.alumnos_rest.servicios.v2.interfaces.AlumnoDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,12 @@ public class AlumnoDtoRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<AlumnoDto> newAlumnoDto(@RequestBody AlumnoDto alumnoDto){
+    public ResponseEntity<AlumnoDto> newAlumnoDto(@Valid @RequestBody AlumnoDto alumnoDto){
         return ResponseEntity.ok(alumnoDtoService.saveAlumno(alumnoDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlumnoDto> updateAlumnoDto(@PathVariable Long id, @RequestBody AlumnoDto alumnoDto){
+    public ResponseEntity<AlumnoDto> updateAlumnoDto(@Valid @PathVariable Long id, @RequestBody AlumnoDto alumnoDto){
         return ResponseEntity.ok(alumnoDtoService.updateAlumno(id, alumnoDto));
     }
 
