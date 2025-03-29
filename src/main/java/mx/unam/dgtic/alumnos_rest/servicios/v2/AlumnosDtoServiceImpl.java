@@ -6,6 +6,9 @@ import mx.unam.dgtic.alumnos_rest.repositorios.AlumnoRepository;
 import mx.unam.dgtic.alumnos_rest.servicios.v2.interfaces.AlumnoDtoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,6 +64,16 @@ public class AlumnosDtoServiceImpl implements AlumnoDtoService {
                 );
         alumnoRepository.deleteById(id);
         return converToDto(alumno);
+    }
+
+    @Override
+    public List<AlumnoDto> getPaginaAlumnosDto(int page, int size, String direction, String sort) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), sort);
+
+        Page<Alumno> pagina = alumnoRepository.findAll(pageRequest);
+        return pagina.getContent().stream()
+                .map(this::converToDto)
+                .collect(Collectors.toList());
     }
 
     private AlumnoDto converToDto(Alumno alumno){
