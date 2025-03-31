@@ -23,7 +23,7 @@ public class Alumno {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Calificacion> calificaciones;
 }

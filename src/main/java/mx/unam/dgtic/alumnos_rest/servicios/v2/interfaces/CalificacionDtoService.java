@@ -6,8 +6,14 @@ import java.util.List;
 
 public interface CalificacionDtoService {
     public abstract List<CalificacionDto> findAllCalificaciones();
+
     public abstract CalificacionDto findById(Long id);
+
     public abstract CalificacionDto saveCalificacion(CalificacionDto calificacionDto);
+
     public abstract CalificacionDto updateCalificacion(Long id, CalificacionDto calificacionDto);
+
     public abstract CalificacionDto deleteCalificacion(Long id);
+
+    public abstract List<CalificacionDto> getPaginaCalificacionDto(int page, int size, String direction, String sort);
 }

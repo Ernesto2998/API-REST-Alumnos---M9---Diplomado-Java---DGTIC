@@ -16,27 +16,27 @@ public class AlumnoDtoRestController {
     private AlumnoDtoService alumnoDtoService;
 
     @GetMapping("/")
-    public ResponseEntity<List<AlumnoDto>> getAllAlumnosDto(){
+    public ResponseEntity<List<AlumnoDto>> getAllAlumnosDto() {
         return ResponseEntity.ok(alumnoDtoService.findAllAlumnos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlumnoDto> getAlumnoDto(@PathVariable Long id){
+    public ResponseEntity<AlumnoDto> getAlumnoDto(@PathVariable Long id) {
         return ResponseEntity.ok(alumnoDtoService.findById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<AlumnoDto> newAlumnoDto(@Valid @RequestBody AlumnoDto alumnoDto){
+    public ResponseEntity<AlumnoDto> newAlumnoDto(@Valid @RequestBody AlumnoDto alumnoDto) {
         return ResponseEntity.ok(alumnoDtoService.saveAlumno(alumnoDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlumnoDto> updateAlumnoDto(@Valid @PathVariable Long id, @RequestBody AlumnoDto alumnoDto){
+    public ResponseEntity<AlumnoDto> updateAlumnoDto(@Valid @PathVariable Long id, @RequestBody AlumnoDto alumnoDto) {
         return ResponseEntity.ok(alumnoDtoService.updateAlumno(id, alumnoDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AlumnoDto> deleteAlumnoDto(@PathVariable Long id){
+    public ResponseEntity<AlumnoDto> deleteAlumnoDto(@PathVariable Long id) {
         return ResponseEntity.ok(alumnoDtoService.deleteAlumno(id));
     }
 }

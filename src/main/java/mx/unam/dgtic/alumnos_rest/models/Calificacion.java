@@ -21,7 +21,6 @@ public class Calificacion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "alumno_id", nullable = false)
-//    @JsonIgnore
     @JsonBackReference
     private Alumno alumno;
 }

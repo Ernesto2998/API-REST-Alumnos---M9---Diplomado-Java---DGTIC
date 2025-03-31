@@ -34,7 +34,7 @@ public class AlumnosDtoServiceImpl implements AlumnoDtoService {
     public AlumnoDto findById(Long id) {
         Alumno alumno = alumnoRepository.findById(id)
                 .orElseThrow(
-                        ()-> new RuntimeException("No se encuentra el alumno en getuno DTO")
+                        () -> new RuntimeException("No se encuentra el alumno en getuno DTO")
                 );
         return converToDto(alumno);
     }
@@ -50,7 +50,7 @@ public class AlumnosDtoServiceImpl implements AlumnoDtoService {
     public AlumnoDto updateAlumno(Long id, AlumnoDto alumnoDto) {
         Alumno alumnoExistente = alumnoRepository.findById(id)
                 .orElseThrow(
-                        ()-> new RuntimeException("No se encontró el alumno DTO a modificar")
+                        () -> new RuntimeException("No se encontró el alumno DTO a modificar")
                 );
         updateAlumnoFromDto(alumnoDto, alumnoExistente);
         return converToDto(alumnoRepository.save(alumnoExistente));
@@ -60,7 +60,7 @@ public class AlumnosDtoServiceImpl implements AlumnoDtoService {
     public AlumnoDto deleteAlumno(Long id) {
         Alumno alumno = alumnoRepository.findById(id)
                 .orElseThrow(
-                        ()-> new RuntimeException("No existe el alumno con id " + id)
+                        () -> new RuntimeException("No existe el alumno con id " + id)
                 );
         alumnoRepository.deleteById(id);
         return converToDto(alumno);
@@ -76,17 +76,17 @@ public class AlumnosDtoServiceImpl implements AlumnoDtoService {
                 .collect(Collectors.toList());
     }
 
-    private AlumnoDto converToDto(Alumno alumno){
+    private AlumnoDto converToDto(Alumno alumno) {
         return modelMapper.map(alumno, AlumnoDto.class);
     }
 
-    private Alumno convertToEntity(AlumnoDto alumnoDto){
+    private Alumno convertToEntity(AlumnoDto alumnoDto) {
         return modelMapper.map(alumnoDto, Alumno.class);
     }
 
-    private void updateAlumnoFromDto(AlumnoDto alumnoDto, Alumno alumno){
-        alumno.setNombre(alumno.getNombre());
-        alumno.setApellido(alumno.getApellido());
-        alumno.setEmail(alumno.getEmail());
+    private void updateAlumnoFromDto(AlumnoDto alumnoDto, Alumno alumno) {
+        alumno.setNombre(alumnoDto.getNombre());
+        alumno.setApellido(alumnoDto.getApellido());
+        alumno.setEmail(alumnoDto.getEmail());
     }
 }
