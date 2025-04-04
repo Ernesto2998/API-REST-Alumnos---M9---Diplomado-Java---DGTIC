@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 @RestControllerAdvice
 public class ManejadorGlobalDeExcepciones {
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<HashMap<String, Object>> manejarPeticionesErroneas(
             HttpMessageNotReadableException ex,
@@ -47,5 +48,19 @@ public class ManejadorGlobalDeExcepciones {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON).body(detalle);
+    }
+
+    @ExceptionHandler(NoExisteAlumnoException.class)
+    public ResponseEntity<HashMap<String, Object>> getNoExisteAlumno(
+            NoExisteAlumnoException ex,
+            HttpServletRequest request
+    ){
+        HashMap<String, Object> detalle = new HashMap<>();
+        detalle.put("mensaje",ex.getMessage());
+        detalle.put("timeStamp", LocalDateTime.now().toString());
+        detalle.put("ruta", request.getRequestURI());
+        detalle.put("status", HttpStatus.NOT_FOUND);
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(detalle);
+        return ResponseEntity.ok(detalle);
     }
 }

@@ -1,6 +1,7 @@
 package mx.unam.dgtic.alumnos_rest.servicios.v2;
 
 import mx.unam.dgtic.alumnos_rest.dtos.AlumnoDto;
+import mx.unam.dgtic.alumnos_rest.exceptions.NoExisteAlumnoException;
 import mx.unam.dgtic.alumnos_rest.models.Alumno;
 import mx.unam.dgtic.alumnos_rest.repositorios.AlumnoRepository;
 import mx.unam.dgtic.alumnos_rest.servicios.v2.interfaces.AlumnoDtoService;
@@ -34,7 +35,7 @@ public class AlumnosDtoServiceImpl implements AlumnoDtoService {
     public AlumnoDto findById(Long id) {
         Alumno alumno = alumnoRepository.findById(id)
                 .orElseThrow(
-                        () -> new RuntimeException("No se encuentra el alumno en getuno DTO")
+                        () -> new NoExisteAlumnoException("No se encontró el alumno DTO a modificar", id)
                 );
         return converToDto(alumno);
     }
